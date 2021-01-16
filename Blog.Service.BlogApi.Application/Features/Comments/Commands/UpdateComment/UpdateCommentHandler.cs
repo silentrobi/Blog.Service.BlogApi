@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Blog.Service.BlogApi.Domain.Comments;
+﻿using Blog.Service.BlogApi.Domain.Comments;
 using Blog.Service.BlogApi.Domain.Repositories;
 using MediatR;
 using System;

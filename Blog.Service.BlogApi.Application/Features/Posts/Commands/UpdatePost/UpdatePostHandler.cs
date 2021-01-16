@@ -28,6 +28,7 @@ namespace Blog.Service.BlogApi.Application.Features.Posts.Commands.UpdatePost
                 throw new  Exceptions.ApplicationException("Unauthorized to update"); //need new exeption model class
             }
 
+            entity.Content = request.UpdatePostDto.Content;
             entity.UpdatedAt = DateTime.Now;
             entity.Uploads = request.UpdatePostDto.Uploads == null || request.UpdatePostDto.Uploads.Count == 0 ? entity.Uploads : request.UpdatePostDto.Uploads;
 

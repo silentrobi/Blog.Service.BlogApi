@@ -9,7 +9,6 @@ namespace Blog.Service.BlogApi.Application.Features.Posts.Commands.CreatePost
             RuleFor(model => model.CreatePostDto.UserId)
               .Cascade(CascadeMode.Stop)
               .NotNull().WithMessage("Please ensure you have entered 'UserId' field")
-              .Length(24).WithMessage("UserId length should be 24");
 
             RuleFor(model => model.CreatePostDto.Content)
               .Cascade(CascadeMode.Stop)

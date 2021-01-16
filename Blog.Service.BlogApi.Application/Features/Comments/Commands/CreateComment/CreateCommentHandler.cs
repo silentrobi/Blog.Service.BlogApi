@@ -26,13 +26,6 @@ namespace Blog.Service.BlogApi.Application.Features.Posts.Commands.CreateComment
         {
             Comment entity = _mapper.Map<Comment>(request.CreateCommentDto);
 
-            User userEntity = _blogUnitOfWork.UserReadOnlyRepository.Get(entity.UserId);
-
-            if (userEntity == null)
-            {
-                throw new Exceptions.ApplicationException("Failed to create Comment: Invalid User Id");
-            }
-
             entity.LikedUsers = new List<string>();
             entity.CreatedAt = DateTime.Now;
 

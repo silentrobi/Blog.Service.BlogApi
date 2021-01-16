@@ -6,6 +6,7 @@ using Blog.Service.BlogApi.Application.Features.Comments.Commands.UnlikeComment;
 using Blog.Service.BlogApi.Application.Features.Comments.Commands.UpdateComment;
 using Blog.Service.BlogApi.Application.Features.Comments.Queries.GetComment;
 using Blog.Service.BlogApi.Application.Features.Comments.Queries.GetComments;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -13,6 +14,7 @@ namespace Blog.Service.BlogApi.Api.Controllers.v1
 {
     [ApiController]
     [Route("api/v{version:apiVersion}/blog/posts/{postId}/comments")]
+    [Authorize]
     public class CommentController : BaseController
     {
         public CommentController()
@@ -24,7 +26,7 @@ namespace Blog.Service.BlogApi.Api.Controllers.v1
         {
             var result = await Mediator.Send(new CreateCommentCommand
             {
-                CreateCommentDto = createCommentDto,
+                CreateCommentDto = new CreateCommentDto(createCommentDto, AuthorizedUserId),
                 PostId = postId
             });
 
@@ -61,7 +63,8 @@ namespace Blog.Service.BlogApi.Api.Controllers.v1
             {
                 UpdateCommentDto = updateCommentDto,
                 PostId = postId,
-                Id = id
+                Id = id,
+                UserId = AuthorizedUserId
             });
 
             return Ok(result);
@@ -73,20 +76,21 @@ namespace Blog.Service.BlogApi.Api.Controllers.v1
             var result = await Mediator.Send(new DeleteCommentCommand
             {
                 PostId = postId,
-                Id = id            
+                Id = id,
+                UserId = AuthorizedUserId
             });
 
             return Ok(result);
         }
 
         [HttpPost("{id}/like")]
-        public async Task<IActionResult> LikeComment(string postId, string id, [FromQuery] string userId)
+        public async Task<IActionResult> LikeComment(string postId, string id)
         {
             var result = await Mediator.Send(new LikeCommentCommand
             {
                 PostId = postId,
                 Id = id,
-                UserId = userId
+                UserId = AuthorizedUserId
             });
 
             return Ok(result);
@@ -99,7 +103,7 @@ namespace Blog.Service.BlogApi.Api.Controllers.v1
             {
                 PostId = postId,
                 Id = id,
-                UserId = userId
+                UserId = AuthorizedUserId
             });
 
             return Ok(result);

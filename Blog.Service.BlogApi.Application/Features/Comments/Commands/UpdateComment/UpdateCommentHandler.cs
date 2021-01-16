@@ -21,7 +21,12 @@ namespace Blog.Service.BlogApi.Application.Features.Comments.Commands.UpdateComm
         {
             Comment entity = _blogUnitOfWork.CommentReadOnlyRepository.Get(request.PostId, request.Id);
 
-            if (entity == null) return false;
+            if (entity == null) throw new Exceptions.ApplicationException("No comment is found to update");
+
+            if (!entity.UserId.Equals(request.UserId))
+            {
+                throw new Exceptions.ApplicationException("Unauthorized to update comment"); //need new exeption model class
+            }
 
             entity.Content = request.UpdateCommentDto.Content;
             entity.UpdatedAt = DateTime.Now;

@@ -26,13 +26,6 @@ namespace Blog.Service.BlogApi.Application.Features.Posts.Commands.CreatePost
         {
             Post entity = _mapper.Map<Post>(request.CreatePostDto);
 
-            User userEntity = _blogUnitOfWork.UserReadOnlyRepository.Get(entity.UserId);
-
-            if (userEntity == null)
-            {
-                throw new Exceptions.ApplicationException("Failed to create post: User Id is not valid");
-            }
-
             entity.CreatedAt = DateTime.Now;
             entity.UpdatedAt = DateTime.Now;
             entity.Comments = new List<Comment>();

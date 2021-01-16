@@ -11,5 +11,17 @@ namespace Blog.Service.BlogApi.Application.Features.Comments.Commands.CreateComm
         public string ParentCommentId { get; set; }
 
         public string UserId { get; set; }
+
+        public CreateCommentDto()
+        {
+
+        }
+
+        public CreateCommentDto(CreateCommentDto createCommentDto, string userId)
+        {
+            Content = createCommentDto.Content;
+            ParentCommentId = createCommentDto.ParentCommentId;
+            UserId = userId;
+        }
     }
 }

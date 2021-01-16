@@ -18,13 +18,6 @@ namespace Blog.Service.BlogApi.Application.Features.Comments.Commands.UnlikeComm
 
         public async Task<bool> Handle(UnlikeCommentCommand request, CancellationToken cancellationToken)
         {
-            User userEntity = _blogUnitOfWork.UserReadOnlyRepository.Get(request.UserId);
-
-            if (userEntity == null)
-            {
-                throw new Exceptions.ApplicationException("Failed to unlike: UserId is not valid");
-            }
-
             Comment commentEntity = _blogUnitOfWork.CommentReadOnlyRepository.Get(request.PostId, request.Id);
 
             if (commentEntity == null)

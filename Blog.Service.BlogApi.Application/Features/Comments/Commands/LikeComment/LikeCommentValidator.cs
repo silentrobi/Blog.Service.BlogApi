@@ -11,9 +11,6 @@ namespace Blog.Service.BlogApi.Application.Features.Comments.Commands.LikeCommen
 
             RuleFor(model => model.Id)
                 .Length(24).WithMessage("Id length should be 24");
-
-            RuleFor(model => model.UserId)
-                .Length(24).WithMessage("UserId length should be 24");
         }
     }
 }

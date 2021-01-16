@@ -8,8 +8,6 @@ using Blog.Service.BlogApi.Application.Features.Posts.Queries.GetPosts;
 using Blog.Service.BlogApi.Domain.QueryMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Blog.Service.BlogApi.Api.Controllers.v1

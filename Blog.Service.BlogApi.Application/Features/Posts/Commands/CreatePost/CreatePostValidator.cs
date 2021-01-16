@@ -8,7 +8,7 @@ namespace Blog.Service.BlogApi.Application.Features.Posts.Commands.CreatePost
         {
             RuleFor(model => model.CreatePostDto.UserId)
               .Cascade(CascadeMode.Stop)
-              .NotNull().WithMessage("Please ensure you have entered 'UserId' field")
+              .NotNull().WithMessage("Please ensure you have entered 'UserId' field");
 
             RuleFor(model => model.CreatePostDto.Content)
               .Cascade(CascadeMode.Stop)

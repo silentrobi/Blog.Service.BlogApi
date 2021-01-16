@@ -12,5 +12,16 @@ namespace Blog.Service.BlogApi.Application.Features.Posts.Commands.CreatePost
         public List<string> Uploads { get; set; }
 
         public string UserId { get; set; }
+
+        public CreatePostDto()
+        {
+        }
+
+        public CreatePostDto(CreatePostDto createPostDto , string userId)
+        {
+            Content = createPostDto.Content;
+            Uploads = createPostDto.Uploads;
+            UserId = userId;
+        }
     }
 }

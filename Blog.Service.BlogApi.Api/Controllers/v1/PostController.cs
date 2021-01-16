@@ -6,13 +6,17 @@ using Blog.Service.BlogApi.Application.Features.Posts.Commands.UpdatePost;
 using Blog.Service.BlogApi.Application.Features.Posts.Queries.GetPost;
 using Blog.Service.BlogApi.Application.Features.Posts.Queries.GetPosts;
 using Blog.Service.BlogApi.Domain.QueryMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Blog.Service.BlogApi.Api.Controllers.v1
 {
     [ApiController]
     [Route("api/v{version:apiVersion}/blog/posts")]
+    [Authorize]
     public class PostController : BaseController
     {
         public PostController()
@@ -47,7 +51,7 @@ namespace Blog.Service.BlogApi.Api.Controllers.v1
         {
             var result = await Mediator.Send(new CreatePostCommand
             {
-                CreatePostDto = createPostDto
+                CreatePostDto = new CreatePostDto(createPostDto, AuthorizedUserId)
             });
 
             return Ok(result);
@@ -59,7 +63,8 @@ namespace Blog.Service.BlogApi.Api.Controllers.v1
             var result = await Mediator.Send(new UpdatePostCommand
             {
                 UpdatePostDto = updatePostDto,
-                Id = id
+                Id = id,
+                UserId = AuthorizedUserId
             });
 
             return Ok(result);
@@ -70,31 +75,32 @@ namespace Blog.Service.BlogApi.Api.Controllers.v1
         {
             var result = await Mediator.Send(new DeletePostCommand
             {
-                Id = id
+                Id = id,
+                UserId = AuthorizedUserId
             });
 
             return Ok(result);
         }
 
         [HttpPost("{id}/like")]
-        public async Task<IActionResult> LikePost(string id, [FromQuery] string userId)
+        public async Task<IActionResult> LikePost(string id)
         {
             var result = await Mediator.Send(new LikePostCommand
             {
                 Id = id,
-                UserId = userId
+                UserId = AuthorizedUserId
             });
 
             return Ok(result);
         }
 
         [HttpPost("{id}/unlike")]
-        public async Task<IActionResult> UnlikePost(string id, [FromQuery] string userId)
+        public async Task<IActionResult> UnlikePost(string id)
         {
             var result = await Mediator.Send(new UnlikePostCommand
             {
                 Id = id,
-                UserId = userId
+                UserId = AuthorizedUserId
             });
 
             return Ok(result);

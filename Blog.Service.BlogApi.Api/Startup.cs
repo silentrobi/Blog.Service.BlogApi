@@ -14,6 +14,7 @@ using Blog.Service.BlogApi.Api.Extensions;
 using FluentValidation;
 using System.Reflection;
 using Blog.Service.BlogApi.Infrastructure.Domain;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Blog.Service.BlogApi.Api
 {
@@ -42,6 +43,17 @@ namespace Blog.Service.BlogApi.Api
                 }
             );
             services.AddSingleton<IBlogContext, BlogContext>();
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(o =>
+            {
+                o.Authority = "https://localhost:5001";
+                o.Audience = "blogapi"; // APi Resource Name
+                o.RequireHttpsMetadata = false;
+            });
 
             //Auto Mapper
             services.AddAutoMapper(cfg =>
@@ -73,6 +85,8 @@ namespace Blog.Service.BlogApi.Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

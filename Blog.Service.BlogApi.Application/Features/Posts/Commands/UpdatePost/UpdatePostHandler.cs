@@ -23,6 +23,11 @@ namespace Blog.Service.BlogApi.Application.Features.Posts.Commands.UpdatePost
 
             if (entity == null) throw new Exceptions.ApplicationException("No Post is found to update");
 
+            if (!entity.UserId.Equals(request.UserId))
+            {
+                throw new  Exceptions.ApplicationException("Unauthorized to update"); //need new exeption model class
+            }
+
             entity.UpdatedAt = DateTime.Now;
             entity.Uploads = request.UpdatePostDto.Uploads == null || request.UpdatePostDto.Uploads.Count == 0 ? entity.Uploads : request.UpdatePostDto.Uploads;
 

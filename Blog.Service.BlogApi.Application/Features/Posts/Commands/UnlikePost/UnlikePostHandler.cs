@@ -18,13 +18,6 @@ namespace Blog.Service.BlogApi.Application.Features.Posts.Commands.UnlikePost
         }
         public async Task<bool> Handle(UnlikePostCommand request, CancellationToken cancellationToken)
         {
-            User userEntity = _blogUnitOfWork.UserReadOnlyRepository.Get(request.UserId);
-
-            if (userEntity == null)
-            {
-                throw new Exceptions.ApplicationException("Failed to unlike: User Id is not valid");
-            }
-
             Post postEntity = _blogUnitOfWork.PostReadOnlyRepository.Get(request.Id);
 
             if (postEntity == null) throw new Exceptions.ApplicationException("No Post is found to unlike");

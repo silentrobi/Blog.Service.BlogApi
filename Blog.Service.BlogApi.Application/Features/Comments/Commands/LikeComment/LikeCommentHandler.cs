@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Blog.Service.BlogApi.Domain.Comments;
 using Blog.Service.BlogApi.Domain.Repositories;
-using Blog.Service.BlogApi.Domain.Users;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;

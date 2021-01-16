@@ -70,7 +70,6 @@ namespace Blog.Service.BlogApi.Api
         public void ConfigureContainer(ContainerBuilder builder)
         {
             builder.RegisterModule(new DomainModule());
-            builder.RegisterModule(new ServiceModule());
             builder.RegisterModule(new MediatorModule());
         }
 

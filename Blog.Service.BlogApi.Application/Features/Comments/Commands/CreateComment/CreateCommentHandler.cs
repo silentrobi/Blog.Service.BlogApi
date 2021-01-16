@@ -6,7 +6,6 @@ using AutoMapper;
 using Blog.Service.BlogApi.Application.Commands.CreateComment;
 using Blog.Service.BlogApi.Domain.Comments;
 using Blog.Service.BlogApi.Domain.Repositories;
-using Blog.Service.BlogApi.Domain.Users;
 using MediatR;
 
 namespace Blog.Service.BlogApi.Application.Features.Posts.Commands.CreateComment

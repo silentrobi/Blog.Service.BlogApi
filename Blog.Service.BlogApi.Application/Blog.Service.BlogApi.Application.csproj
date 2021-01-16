@@ -27,6 +27,10 @@
     <ProjectReference Include="..\Blog.Service.BlogApi.Infrastructure\Blog.Service.BlogApi.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>

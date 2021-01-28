@@ -50,7 +50,7 @@ namespace Blog.Service.BlogApi.Api
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(o =>
             {
-                o.Authority = "https://localhost:5001";
+                o.Authority = "https://localhost:5011";
                 o.Audience = "blogapi"; // APi Resource Name
                 o.RequireHttpsMetadata = false;
             });

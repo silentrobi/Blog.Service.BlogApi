@@ -21,7 +21,7 @@ namespace Blog.Service.BlogApi.Application.Features.Posts.Commands.UpdatePost
         {
             Post entity = _blogUnitOfWork.PostReadOnlyRepository.Get(request.Id);
 
-            if (entity == null) throw new Exceptions.ApplicationException("No Post is found to update");
+            if (entity == null) throw new Exceptions.ItemNotFoundException("No Post is found to update");
 
             if (!entity.UserId.Equals(request.UserId))
             {
